@@ -1,0 +1,47 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#ingredients").on("click focus", ".ingredient.inactive", function(e) {
+			var curRow = $(this);
+			curRow.clone().appendTo("#ingredients");
+			curRow.removeClass("inactive").find("input:first").focus();
+			curRow.find(".fa-remove").removeClass("hide");
+		}).on("click", ".fa-remove", function(e) {
+			$(this).closest(".ingredient").remove();
+		});
+
+	});
+</script>
+<h4 class="muted">New Recipe</h4>
+<div class="alert alert-info" role="alert" ng-show="message.length">{{message}}</div>
+<form class="form-horizontal"role="form" ng-submit="createNewRecipe()">
+	<div class="control-group">
+		<label class="control-label" for="recipeName">Name:</label>
+		<div class="controls">
+			<input class="input-xlarge" type="text" name="recipeName" ng-model="recipe.name" ng-trim="true" placeholder="Required" required >
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="recipeMethod">Method:</label>
+		<div class="controls">
+			<input class="input-xlarge" type="text" name="recipeMethod" ng-model="recipe.method" ng-trim="true" placeholder="Required" required >
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label" for="recipeMethod">Ingredients:</label>
+		<div class="controls">
+			<div id="ingredients">
+				<div class="row-fluid ingredient inactive">
+					<input class="input-xlarge ingredientName" type="text" >
+					<i class="fa fa-remove pointer hide"></i>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<input type="submit" class="btn btn-primary" value="Submit">
+		</div>
+	</div>
+</form>
